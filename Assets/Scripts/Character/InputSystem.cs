@@ -12,6 +12,8 @@ public class InputSystem : MonoBehaviour
         public string horizontal = "Horizontal";
         public string vertical = "Vertical";
         public string sprint = "Sprint";
+        public string aim = "Fire2";
+        public string fire = "Fire1";
     }
     [SerializeField]
 
@@ -29,12 +31,27 @@ public class InputSystem : MonoBehaviour
         camCenter = Camera.main.transform.parent;
     }
 
+    bool isAiming;
     void Update()
     {
         if (Input.GetAxis(input.horizontal) !=0 || Input.GetAxis(input.vertical) != 0)
                 rotateToCamView();
         move.CharacterMove(Input.GetAxis(input.horizontal), Input.GetAxis(input.vertical));
         move.CharacterSprint(Input.GetButton(input.sprint));
+
+        isAiming = Input.GetButton(input.aim);
+        move.CharacterAim(isAiming);
+
+        if (isAiming)
+        {
+            move.CharacterPullString(Input.GetButton(input.fire));
+
+            if (Input.GetButtonUp(input.fire))
+            {
+                move.CharacterFire();
+            }
+        }
+
     }
 
     void rotateToCamView()

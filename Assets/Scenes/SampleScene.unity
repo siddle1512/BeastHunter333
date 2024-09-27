@@ -32580,7 +32580,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.19, y: 0.93, z: -4.63}
+  m_LocalPosition: {x: -1.19, y: 0.82, z: -4.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -70481,6 +70481,8 @@ MonoBehaviour:
     horizontal: Horizontal
     vertical: Vertical
     sprint: Sprint
+  lookDistace: 5
+  lookSpeed: 5
 --- !u!114 &2011168647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73800,6 +73802,8 @@ MonoBehaviour:
     horizontal: Horizontal
     vertical: Vertical
     sprint: Sprint
+  lookDistace: 5
+  lookSpeed: 5
 --- !u!1001 &2103275045
 PrefabInstance:
   m_ObjectHideFlags: 0

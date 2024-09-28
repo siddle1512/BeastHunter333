@@ -33,6 +33,7 @@ public class CameraController : MonoBehaviour
     camInputSettings cis;
 
     Camera maincam;
+    Camera UICam;
     Transform center;
     Transform target;
 
@@ -42,7 +43,7 @@ public class CameraController : MonoBehaviour
     {
         maincam = Camera.main;
         center = transform.GetChild(0);
-        
+        UICam = maincam.GetComponentInChildren<Camera>();
     }
 
     void Update()
@@ -94,10 +95,12 @@ public class CameraController : MonoBehaviour
         if (Input.GetButton(cis.aimInput))
         {
             maincam.fieldOfView = Mathf.Lerp(maincam.fieldOfView, camsettings.zoomFileOfView, camsettings.zoomSpeed * Time.deltaTime);
+            UICam.fieldOfView = Mathf.Lerp(maincam.fieldOfView, camsettings.zoomFileOfView, camsettings.zoomSpeed * Time.deltaTime);
         }
         else
         {
             maincam.fieldOfView = Mathf.Lerp(maincam.fieldOfView, camsettings.originalzoomFileOfView, camsettings.zoomSpeed * Time.deltaTime);
+            UICam.fieldOfView = Mathf.Lerp(maincam.fieldOfView, camsettings.originalzoomFileOfView, camsettings.zoomSpeed * Time.deltaTime);
         }
     }
 

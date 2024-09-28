@@ -6,6 +6,8 @@ using UnityEngine;
 public class InputSystem : MonoBehaviour
 {
     Movement move;
+    public bow bowScripts;
+
     [System.Serializable]
     public class InputSetting
     {
@@ -23,12 +25,28 @@ public class InputSystem : MonoBehaviour
     public float lookDistace = 5;
     public float lookSpeed = 5;
 
+    [Header("aim setting")]
+    public RaycastHit hit;
+    Ray ray;
+
+    public LayerMask aimMask;
+
+    //[Header("spine rotate settings")]
+    //public Transform spine;
+    //public Vector3 spineOffset;
+
+    [Header("head settings")]
+    public float lookAt = 2.8f;
+
+
+    Transform maincam;
     Transform camCenter;
 
     void Start()
     {
         move = GetComponent<Movement>();
         camCenter = Camera.main.transform.parent;
+        maincam = Camera.main.transform;
     }
 
     bool isAiming;
@@ -44,6 +62,7 @@ public class InputSystem : MonoBehaviour
 
         if (isAiming)
         {
+            aim();
             move.CharacterPullString(Input.GetButton(input.fire));
 
             if (Input.GetButtonUp(input.fire))
@@ -53,6 +72,11 @@ public class InputSystem : MonoBehaviour
         }
 
     }
+
+    //void LateUpdate()
+    //{
+    //    rotateCharacterSpine();
+    //}
 
     void rotateToCamView()
     {
@@ -66,4 +90,40 @@ public class InputSystem : MonoBehaviour
         transform.rotation = final;
 
     }
+
+    void aim()
+    {
+        if (maincam == null)
+        {
+            Debug.LogError("Main Camera is not assigned.");
+            return;
+        }
+
+        if (bowScripts == null)
+        {
+            Debug.LogError("Bow Scripts is not assigned.");
+            return;
+        }
+
+        Vector3 camPos = maincam.position;
+        Vector3 dir = maincam.forward;
+
+        ray = new Ray(camPos, dir);
+        if (Physics.Raycast(ray, out hit, 500f, aimMask))
+        {
+            bowScripts.ShowCrossHair(hit.point); // Ensure bowScripts is assigned properly
+        }
+        else
+        {
+            bowScripts.Remove(); // Ensure bowScripts is assigned properly
+        }
+    }
+
+
+
+    //void rotateCharacterSpine()
+    //{
+    //    spine.LookAt(ray.GetPoint(50));
+    //    spine.Rotate(spineOffset);
+    //}
 }

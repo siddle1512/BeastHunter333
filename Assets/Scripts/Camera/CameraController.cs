@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -79,7 +79,7 @@ public class CameraController : MonoBehaviour
 
     void rotateCam()
     {
-        camXRotate += Input.GetAxis(cis.mouseYAxis) * camsettings.mouseY_Sensivity;
+        camXRotate -= Input.GetAxis(cis.mouseYAxis) * camsettings.mouseY_Sensivity;
         camYRotate += Input.GetAxis(cis.mouseXAxis) * camsettings.mouseX_Sensivity;
 
         camXRotate = Mathf.Clamp(camXRotate, camsettings.minClamp, camsettings.maxClamp);

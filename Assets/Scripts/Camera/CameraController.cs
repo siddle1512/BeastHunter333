@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -16,8 +15,8 @@ public class CameraController : MonoBehaviour
         public float zoomFileOfView = 30;
         public float originalzoomFileOfView = 60;
         public float zoomSpeed = 5;
-
     }
+
     [SerializeField]
     CamSetting camsettings;
 
@@ -28,8 +27,8 @@ public class CameraController : MonoBehaviour
         public string mouseYAxis = "Mouse Y";
         public string aimInput = "Fire2";
     }
-    [SerializeField]
 
+    [SerializeField]
     camInputSettings cis;
 
     Camera maincam;
@@ -39,16 +38,25 @@ public class CameraController : MonoBehaviour
 
     float camXRotate = 0;
     float camYRotate = 0;
+    bool isPaused = false;
+
     void Start()
     {
         maincam = Camera.main;
         center = transform.GetChild(0);
         UICam = maincam.GetComponentInChildren<Camera>();
+
+        LockCursor();
     }
 
     void Update()
     {
-        if (!target)
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+
+        if (isPaused || !target)
             return;
 
         rotateCam();
@@ -57,7 +65,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (target)
+        if (!isPaused && target)
         {
             FollowPlayer();
         }
@@ -66,6 +74,7 @@ public class CameraController : MonoBehaviour
             findPlayer();
         }
     }
+
     void FollowPlayer()
     {
         Vector3 MoveVector = Vector3.Lerp(transform.position, target.transform.position, Time.deltaTime * camsettings.moveSpeed);
@@ -104,4 +113,37 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            UnlockCursor();
+        }
+        else
+        {
+            LockCursor();
+        }
+    }
+
+    private void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Time.timeScale = 1;
+    }
+
+    private void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    private void OnDisable()
+    {
+        UnlockCursor();
+    }
 }

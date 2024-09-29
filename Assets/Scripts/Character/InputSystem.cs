@@ -31,9 +31,9 @@ public class InputSystem : MonoBehaviour
 
     public LayerMask aimMask;
 
-    //[Header("spine rotate settings")]
-    //public Transform spine;
-    //public Vector3 spineOffset;
+    [Header("spine rotate settings")]
+    public Transform spine;
+    public Vector3 spineOffset;
 
     [Header("head settings")]
     public float lookAt = 2.8f;
@@ -47,7 +47,25 @@ public class InputSystem : MonoBehaviour
         move = GetComponent<Movement>();
         camCenter = Camera.main.transform.parent;
         maincam = Camera.main.transform;
+
+        if (spine == null)
+        {
+            spine = GameObject.Find("Spine").transform; // Thay thế "Spine" bằng tên của đối tượng trong Hierarchy nếu có
+        }
+
+        // Giữ chỉ một AudioListener khi sử dụng nhiều camera
+        if (Camera.main != null && Camera.main.GetComponent<AudioListener>() != null)
+        {
+            foreach (var listener in FindObjectsOfType<AudioListener>())
+            {
+                if (listener != Camera.main.GetComponent<AudioListener>())
+                {
+                    listener.enabled = false;
+                }
+            }
+        }
     }
+
 
     bool isAiming;
     void Update()
@@ -70,13 +88,18 @@ public class InputSystem : MonoBehaviour
                 move.CharacterFire();
             }
         }
+        else
+        {
+            bowScripts.Remove();
+        }
 
     }
 
-    //void LateUpdate()
-    //{
-    //    rotateCharacterSpine();
-    //}
+    void LateUpdate()
+    {
+        if(isAiming)
+            rotateCharacterSpine();
+    }
 
     void rotateToCamView()
     {
@@ -121,9 +144,28 @@ public class InputSystem : MonoBehaviour
 
 
 
-    //void rotateCharacterSpine()
-    //{
-    //    spine.LookAt(ray.GetPoint(50));
-    //    spine.Rotate(spineOffset);
-    //}
+    void rotateCharacterSpine()
+    {
+        spine.LookAt(ray.GetPoint(50));
+        spine.Rotate(spineOffset);
+    }
+
+    public void Pull()
+    {
+        bowScripts.PullString();
+    }
+
+    public void EnableArrow()
+    {
+        bowScripts.PickArrow();
+    }
+
+    public void DisableArrow()
+    {
+        bowScripts.DisableArrow();
+    }
+    public void Release()
+    {
+        bowScripts.ReleaseString();
+    }
 }

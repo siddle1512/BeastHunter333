@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -38,7 +37,6 @@ public class CameraController : MonoBehaviour
 
     float camXRotate = 0;
     float camYRotate = 0;
-    bool isPaused = false;
 
     void Start()
     {
@@ -46,26 +44,19 @@ public class CameraController : MonoBehaviour
         center = transform.GetChild(0);
         UICam = maincam.GetComponentInChildren<Camera>();
 
-        LockCursor();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause();
-        }
-
-        if (isPaused || !target)
-            return;
-
         rotateCam();
         zoomCam();
     }
 
     private void LateUpdate()
     {
-        if (!isPaused && target)
+        if (target)
         {
             FollowPlayer();
         }
@@ -111,39 +102,5 @@ public class CameraController : MonoBehaviour
             maincam.fieldOfView = Mathf.Lerp(maincam.fieldOfView, camsettings.originalzoomFileOfView, camsettings.zoomSpeed * Time.deltaTime);
             UICam.fieldOfView = Mathf.Lerp(maincam.fieldOfView, camsettings.originalzoomFileOfView, camsettings.zoomSpeed * Time.deltaTime);
         }
-    }
-
-    private void TogglePause()
-    {
-        isPaused = !isPaused;
-
-        if (isPaused)
-        {
-            UnlockCursor();
-        }
-        else
-        {
-            LockCursor();
-        }
-    }
-
-    private void LockCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        Time.timeScale = 1;
-    }
-
-    private void UnlockCursor()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        Time.timeScale = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-    }
-
-    private void OnDisable()
-    {
-        UnlockCursor();
     }
 }

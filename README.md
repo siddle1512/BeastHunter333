@@ -5,12 +5,6 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/siddle1512/BeastHunter333)
 ![GitHub License](https://img.shields.io/github/license/siddle1512/BeastHunter333)
 
-> A library management web tool for efficient organization
-
-## Contributing
-
-- See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for more informations.
-
 ## Contributors
 
 <div align="center">

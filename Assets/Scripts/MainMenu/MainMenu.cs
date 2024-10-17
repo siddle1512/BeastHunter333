@@ -13,4 +13,17 @@ public class GameMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("Player Has Quit The Game");
     }
+
+    public void SetFullscreenMode()
+    {
+        Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
+        Debug.Log("Fullscreen");
+    }
+    public void SetWindowedMode()
+    {
+        Screen.fullScreenMode = FullScreenMode.Windowed;
+        Screen.SetResolution(1280, 720, false);
+        Debug.Log("Windowed");
+    }
 }

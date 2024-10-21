@@ -48,6 +48,8 @@ public class Bow : MonoBehaviour
     void Start()
     {
         bowAudio = GetComponent<AudioSource>();
+        bowSettings.arrowCount = 100;
+        bowSettings.arrowForce = 80f; 
     }
 
     // Update is called once per frame

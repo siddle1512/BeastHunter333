@@ -81,7 +81,7 @@ public class InputSystem : MonoBehaviour
         if (isAiming)
         {
             Aim();
-            //bowScript.EquipBow();
+            bowScript.EquipBow();
 
             if (bowScript.bowSettings.arrowCount > 0)
                 moveScript.CharacterPullString(Input.GetButton(input.fire));
@@ -103,7 +103,7 @@ public class InputSystem : MonoBehaviour
         }
         else
         {
-            //bowScript.UnEquipBow();
+            bowScript.UnEquipBow();
             bowScript.RemoveCrosshair();
             DisableArrow();
             Release();

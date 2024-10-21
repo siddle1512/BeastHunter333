@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [ExecuteInEditMode]
 public class CameraController : MonoBehaviour
@@ -50,6 +50,9 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         mainCam = Camera.main;
         UICam = mainCam.GetComponentInChildren<Camera>();
         center = transform.GetChild(0);
@@ -59,7 +62,7 @@ public class CameraController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {     
         if (!target)
             return;
 
@@ -69,8 +72,6 @@ public class CameraController : MonoBehaviour
         RotateCamera();
         ZoomCamera();
         HandleCamCollision();
-
-        Cursor.visible = false;
     }
 
     void LateUpdate()

@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
 public class Movement : MonoBehaviour
 {
+    [SerializeField] private TMP_Text Score1;
+
     CharacterController cc;
     Animator anim;
 
@@ -30,7 +33,8 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
+        Score1.text = UsernameMenu.score.ToString();
     }
 
     public void AnimateCharacter(float forward, float strafe)

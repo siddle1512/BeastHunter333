@@ -12,6 +12,7 @@ public class UsernameMenu : MonoBehaviour
 
     void Start()
     {
+        Debug.LogWarning("UsernameMenu started!"); // Log để kiểm tra
         // Kiểm tra nếu có button
         if (submitButton != null)
         {

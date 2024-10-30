@@ -8,10 +8,12 @@ public class Dragon : MonoBehaviour
     public void TakeDamge(int damageAmount)
     {
         HP -= damageAmount;
+        UsernameMenu.score += damageAmount;
         if (HP <= 0)
         {
             animator.SetTrigger("die");
             GetComponent<Collider>().enabled = false;
+            Debug.LogWarning("Score: " + UsernameMenu.score);
         }
         else
         {

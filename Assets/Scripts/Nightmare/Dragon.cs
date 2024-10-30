@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Dragon : MonoBehaviour
 {
-    public int HP = 100;
+    public int HP = 500;
 
     public Animator animator;
     public void TakeDamge(int damageAmount)
@@ -19,10 +19,18 @@ public class Dragon : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<Player>().TakeDamge(50);
+            Debug.Log("Enter Trigger");
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame

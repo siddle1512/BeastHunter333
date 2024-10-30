@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -7,6 +8,8 @@ public class Arrow : MonoBehaviour
     bool disableRotation;
     public float destroyTime = 10f;
     AudioSource arrowAudio;
+
+    public int damageAmout = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +34,14 @@ public class Arrow : MonoBehaviour
             disableRotation = true;
             rb.isKinematic = true;
             bx.isTrigger = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Dragon")
+        {
+            other.GetComponent<Dragon>().TakeDamge(damageAmout);
         }
     }
 }

@@ -1,12 +1,16 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameMenu : MonoBehaviour
 {
+    public InputField usernameInputField;
     public void Play()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
 
     void Start()
     {
@@ -16,7 +20,8 @@ public class GameMenu : MonoBehaviour
 
     public void Quit()
     {
-        Application.Quit();
+        SceneManager.LoadScene("MenuScore");
+        //Application.Quit();
         Debug.Log("Player Has Quit The Game");
     }
 

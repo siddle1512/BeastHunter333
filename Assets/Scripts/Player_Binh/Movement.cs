@@ -6,8 +6,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private TMP_Text Score1;
-
     [SerializeField] private TMP_Text Hp;
+
     CharacterController cc;
     Animator anim;
 

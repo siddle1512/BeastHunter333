@@ -30,7 +30,7 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.tag != "Player")
         {
-            //   arrowAudio.Play();
+            arrowAudio.Play();
             disableRotation = true;
             rb.isKinematic = true;
             bx.isTrigger = true;

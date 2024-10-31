@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -11,10 +14,16 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("die");
             GetComponent<Collider>().enabled = false;
+            Task.Delay(4000);
+            SceneManager.LoadScene("MenuScore");
         }
         else
         {
             animator.SetTrigger("damage");
         }
+    }
+    public int GetHP()
+    {
+        return HP;
     }
 }

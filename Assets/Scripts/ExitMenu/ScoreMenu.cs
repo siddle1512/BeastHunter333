@@ -88,6 +88,8 @@ public class ScoreMenu : MonoBehaviour
             Score4.text = scores[3].score.ToString();
             CurrentScore.text = UsernameMenu.score.ToString();
             
+            UsernameMenu.username = "";
+            UsernameMenu.score = 0;
         }
         else
         {

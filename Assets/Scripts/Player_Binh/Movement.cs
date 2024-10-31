@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         
-        Hp.text = GetComponent<Player>().GetHP().ToString();
+        //Hp.text = GetComponent<Player>().GetHP().ToString();
         Score1.text = UsernameMenu.score.ToString();
     }
 

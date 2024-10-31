@@ -2477,6 +2477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score1: {fileID: 1770876546}
+  Hp: {fileID: 0}
   animStrings:
     forward: forward
     strafe: strafe

@@ -1,14 +1,22 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NewBehaviourScript : MonoBehaviour
 {
     public static bool Paused = false;
     public GameObject PauseMenuCanvas;
 
+    [SerializeField]
+    private AudioMixer audioMixer;
+    [SerializeField]
+    private Slider volumeSlider;
+
     void Start()
     {
         Time.timeScale = 1f;
+        SetMusicVolume();
     }
 
     void Update()
@@ -24,6 +32,12 @@ public class NewBehaviourScript : MonoBehaviour
                 Stop();
             }
         }
+    }
+
+    public void SetMusicVolume()
+    {
+        float volume = volumeSlider.value;
+        audioMixer.SetFloat("music", Mathf.Log10(volume)*20);
     }
 
     void Stop()

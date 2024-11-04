@@ -55,4 +55,9 @@ public class UsernameMenu : MonoBehaviour
             submitButton.onClick.RemoveAllListeners();
         }
     }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+    }
 }

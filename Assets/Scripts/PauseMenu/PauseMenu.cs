@@ -13,10 +13,16 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField]
     private Slider volumeSlider;
 
+    [SerializeField]
+    private AudioMixer audioSfxMixer;
+    [SerializeField]
+    private Slider volumeSfxSlider;
+
     void Start()
     {
         Time.timeScale = 1f;
         SetMusicVolume();
+        SetSfxVolume();
     }
 
     void Update()
@@ -38,6 +44,12 @@ public class NewBehaviourScript : MonoBehaviour
     {
         float volume = volumeSlider.value;
         audioMixer.SetFloat("music", Mathf.Log10(volume)*20);
+    }
+
+    public void SetSfxVolume()
+    {
+        float volume = volumeSfxSlider.value;
+        audioSfxMixer.SetFloat("sfx", Mathf.Log10(volume) * 20);
     }
 
     void Stop()

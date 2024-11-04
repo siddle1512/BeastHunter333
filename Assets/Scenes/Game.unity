@@ -245,7 +245,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1379052381}
         m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
-        m_MethodName: SetMusicVolume
+        m_MethodName: SetSfxVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3233,6 +3233,8 @@ MonoBehaviour:
   PauseMenuCanvas: {fileID: 414246575}
   audioMixer: {fileID: 24100000, guid: dc8cda81832db424b911568d58d6f014, type: 2}
   volumeSlider: {fileID: 695751194}
+  audioSfxMixer: {fileID: 24100000, guid: dc8cda81832db424b911568d58d6f014, type: 2}
+  volumeSfxSlider: {fileID: 103890140}
 --- !u!1 &1432166913
 GameObject:
   m_ObjectHideFlags: 0
